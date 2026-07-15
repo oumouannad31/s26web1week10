@@ -1,0 +1,146 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*****************************************************
+                        Main Styles
+******************************************************/
+.container{
+    background-color: rgb(190, 190, 190);
+    max-width:960px; /*max-width ensures your site won't expand forever*/
+    margin: 0 auto; /*margin auto on the left and right centers the object on the screen*/
+}
+
+header{
+    background: orange;
+    height:300px;
+    display: flex; /*can be used to center things vertically or horizontally*/
+    justify-content:center; /*justify-content affects the main flex axis*/
+    align-items: center; /*align-items affects the cross axis*/
+}
+
+h1{
+    font-size: 36px;
+    font-weight: bold;
+    color: blanchedalmond;
+}
+
+/*this tarhets only the anchor (a) tags in the nav, so not any other link on your page*/
+nav a{
+    display: block; /*so we can give them a width, height, and make them look like buttons*/
+    background: hsl(31, 84%, 76%);
+    border-top: 1px solid hsl(38, 100%, 50%);
+    border-bottom: 1px solid hsl(38, 100%, 50%);
+    padding: 1rem 0; /*two values means top-bottom, left-right*/
+    text-align: center;
+    text-decoration: none;
+}
+
+/* add an hover and an active state - hover for anything with a cursor, active for the touch screens*/
+nav :hover, nav:active{
+    background: hsl(31, 89%, 42%);
+}
+
+main{
+    display:flex;
+    /*you can tell the content to wrap if it runs out of space*/
+    flex-wrap: wrap;
+}
+
+main div{
+    border:1px solid black;
+    background-color: bisque;
+    /*flexbox can still have padding and margin on items*/
+    margin:1em;
+    padding:1em;
+
+    flex-grow:1 ; /*flex grow (and flex-shrink) always grow and shrink relative to the content inside the object*/
+    flex-basis: 0; /*this tells flex-grow to ignore the object's content*/
+}
+
+main div:nth-child(2){
+    flex-grow: 2;
+}
+
+/*****************************************************
+                        Media quieries
+******************************************************/
+
+/*set up a break point to transition to a more horizontal layout*/
+@media screen and ( min-width:760px) {
+    /*these styles will only apply when the screen is 768px or wider*/
+
+    nav ul{
+        /*use display:flex to make the li sit next to each other 
+        you have to put display:flex on the container, or the parent, 
+        of the things you want to affect*/
+        display: flex;
+        /*justify-content controls how the objects flex, or how they display*/
+        justify-content:space-between;
+    }
+
+    /*you can also control properties on flex items (the children) including how they grow or shrink to use the space*/
+    nav li{
+        flex-grow: 1; /*make them all grow to the same size*/
+    } 
+    
+    footer{
+        display: flex;
+    }
+
+    footer div{
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        flex-grow: 1;
+    }
+
+    footer div.footnav{
+        /*use flex-grow to make the secondary nav take up more space, and move around from its original order*/
+        flex-grow: 2; /*flex grow is a ratio, based on all object- since the other things all have a flex grow of 1, this takes up twice as much space*/
+        order: 2; /*all object has a default order of 1, setting them higher will move the objects towards the end of the flex */
+    }
+}
